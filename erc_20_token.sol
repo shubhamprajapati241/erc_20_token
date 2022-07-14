@@ -23,8 +23,7 @@ contract Block is ERC20Interface {
     address public founder; // here we store address of the founder of token
     mapping(address=>uint) public balances; // this is keep the track of balances of particular user or address.
     mapping(address=> mapping(address=> uint)) allowed; // Nested mapping
-
- 
+    
     constructor() {
         // Initializing the variable here
         totalSupply = 100000; // total supply as 10000
@@ -37,14 +36,13 @@ contract Block is ERC20Interface {
         return balances[tokenOwner];
     }
 
-
     function transfer(address to,uint tokens) public override returns(bool success){
-    require(balances[msg.sender]>=tokens);
-    balances[to]+=tokens; //balances[to]=balances[to]+tokens;
-    balances[msg.sender]-=tokens;
-    emit Transfer(msg.sender,to,tokens);
-    return true;
-}
+        require(balances[msg.sender]>=tokens);
+        balances[to]+=tokens; //balances[to]=balances[to]+tokens;
+        balances[msg.sender]-=tokens;
+        emit Transfer(msg.sender,to,tokens);
+        return true;
+    }
 
     // Authorizing the user to use the token
     function approve(address spender, uint tokens) public override returns(bool success) {
@@ -66,15 +64,5 @@ contract Block is ERC20Interface {
         balances[to] += tokens;
         return true;
     }
-    
-
-
-
-
-
-
-
-
-
-
+   
 }
